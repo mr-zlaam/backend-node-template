@@ -1,0 +1,20 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id   String @id @default(cuid())
+  name String
+}
+
+model RateLimiterFlexible {
+  key    String    @id @default(cuid())
+  points Int
+  expire DateTime?
+}
