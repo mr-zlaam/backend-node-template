@@ -11,7 +11,7 @@ const connectDB = async (): Promise<void> => {
     .$connect()
     .then(() =>
       app.listen(PORT, () => {
-        logger.info(`Connected to the database successfully ✅\nSERVER:: Server is running on port http://localhost:${PORT} 🚀`);
+        logger.info(`Connected to the database successfully ✅ \n  SERVER:: Server is running on port http://localhost:${PORT} 🚀`);
       })
     )
     .catch((err: unknown) => {
