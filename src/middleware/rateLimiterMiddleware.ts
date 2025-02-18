@@ -1,10 +1,10 @@
 import { RateLimiterPrisma } from "rate-limiter-flexible";
 import type { NextFunction, Request, Response } from "express";
 import { db } from "../databases/database.js";
-import { httpResponse } from "../utils/ apiResponseUtils.js";
+import { httpResponse } from "../utils/apiResponseUtils.js";
 import { ENV } from "../configs/config.js";
 import { ERRMSG, INTERNALSERVERERRORCODE, TOOMANYREQUESTSCODE, TOOMANYREQUESTSMSG } from "../constants/constant.js";
-import getMinutes from "../utils/ getMinutesUtils.js";
+import getMinutes from "../utils/etMinutesUtils.js";
 
 type ErrorLimiter = {
   remainingPoints: number;

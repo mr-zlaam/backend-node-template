@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { app } from "../app.js";
 import { PORT } from "../configs/config.js";
+import logger from "../utils/loggerUtils.js";
 
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
 const db = new PrismaClient({});
@@ -10,11 +11,12 @@ const connectDB = async (): Promise<void> => {
     .$connect()
     .then(() =>
       app.listen(PORT, () => {
-        console.log(`Connected to the database successfully✅ \n Server is running on port http://localhost:${PORT}`);
+        logger.info(`Connected to the database successfully ✅\nSERVER:: Server is running on port http://localhost:${PORT} 🚀`);
       })
     )
-    .catch((err) => {
-      console.log("Error connecting to DB", err);
+    .catch((err: unknown) => {
+      if (err instanceof Error) logger.error(`Database connection error: ${err.message}`);
+      else logger.error("Error connecting to DB", { err });
       return process.exit(1);
     }));
 };
