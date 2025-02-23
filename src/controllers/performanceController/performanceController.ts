@@ -1,4 +1,4 @@
-import { INTERNALSERVERERRORMSG, SUCCESSCODE, SUCCESSMSG } from "../../constants/constant.js";
+import reshttp from "reshttp";
 import { httpResponse } from "../../utils/apiResponseUtils.js";
 import QuickerUtils from "../../utils/quickerUtils.js";
 import type { Request, Response } from "express";
@@ -9,12 +9,12 @@ class PerformanceController {
         applicationHealth: QuickerUtils.getApplicationHealth(),
         systemHealth: QuickerUtils.getSystemHealth()
       };
-      httpResponse(req, res, SUCCESSCODE, SUCCESSMSG, healthData);
+      httpResponse(req, res, reshttp.okCode, reshttp.okMessage, healthData);
     } catch (error) {
       if (error instanceof Error) {
         throw {
-          status: 500,
-          message: error.message || INTERNALSERVERERRORMSG
+          status: reshttp.internalServerErrorCode,
+          message: error.message || reshttp.internalServerErrorMessage
         };
       }
     }
